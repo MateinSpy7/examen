@@ -3,6 +3,7 @@ package org.ucb.appp1.di
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import org.ucb.appp1.crossref.presentation.viewmodel.CrossrefViewModel
+import org.ucb.appp1.exchange.presentation.viewmodel.ExchangeViewModel
 import org.ucb.appp1.signin.presentation.viewmodel.LoginViewModel
 import org.ucb.appp1.userinformation.presentation.viewmodel.UserInformationViewModel
 
@@ -10,4 +11,5 @@ val presentationModule = module {
     viewModelOf(::LoginViewModel)
     viewModelOf(::UserInformationViewModel)
     viewModelOf(::CrossrefViewModel)
+    viewModelOf(::ExchangeViewModel)
 }

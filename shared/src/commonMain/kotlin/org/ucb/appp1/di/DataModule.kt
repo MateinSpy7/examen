@@ -1,10 +1,14 @@
 package org.ucb.appp1.di
 
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import org.ucb.appp1.crossref.data.datasource.CrossrefRemoteDataSource
 import org.ucb.appp1.crossref.data.repository.CrossrefRepositoryImpl
 import org.ucb.appp1.crossref.data.service.CrossrefApiService
 import org.ucb.appp1.crossref.domain.repository.CrossrefRepository
+import org.ucb.appp1.exchange.data.datasource.RealTimeDataBase
+import org.ucb.appp1.exchange.data.repository.ExchangeRepositoryImpl
+import org.ucb.appp1.exchange.domain.repository.ExchangeRepository
 import org.ucb.appp1.userinformation.data.datasource.GithubRemoteDataSource
 import org.ucb.appp1.userinformation.data.repository.GithubRepositoryImpl
 import org.ucb.appp1.userinformation.data.service.GitHubApiService
@@ -15,4 +19,6 @@ val dataModule = module {
     single<GithubRepository>{GithubRepositoryImpl(get())}
     single<CrossrefRemoteDataSource> { CrossrefApiService() }
     single<CrossrefRepository>{CrossrefRepositoryImpl(get())}
+    singleOf(::RealTimeDataBase)
+    single<ExchangeRepository> { ExchangeRepositoryImpl(get()) }
 }

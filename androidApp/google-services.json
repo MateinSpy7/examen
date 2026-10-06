@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1012158676309",
+    "project_id": "prueba-2051a",
+    "storage_bucket": "prueba-2051a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012158676309:android:386d1f17aa194e635ec3dc",
+        "android_client_info": {
+          "package_name": "org.ucb.appp1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPniC7NGqzGbO_MCs6BKlTJEHh-nltqHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
