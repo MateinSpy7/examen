@@ -23,6 +23,7 @@ googleServices = "4.4.2"
 
 [libraries]
 firebase-database = { module = "dev.gitlive:firebase-database", version.ref = "firebaseDatabase" }
+firebase-config = { module = "dev.gitlive:firebase-config", version.ref = "firebaseDatabase" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-compose" ,version.ref = "koin"}
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" ,version.ref = "koin"}

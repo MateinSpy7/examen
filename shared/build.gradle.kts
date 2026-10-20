@@ -100,6 +100,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
 
             implementation(libs.firebase.database)
+            implementation(libs.firebase.config)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

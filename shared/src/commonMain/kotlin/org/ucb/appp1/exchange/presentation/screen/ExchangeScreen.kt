@@ -3,12 +3,13 @@ package org.ucb.appp1.exchange.presentation.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import org.koin.compose.viewmodel.koinViewModel
 import org.ucb.appp1.exchange.presentation.viewmodel.ExchangeViewModel
 
@@ -16,12 +17,15 @@ import org.ucb.appp1.exchange.presentation.viewmodel.ExchangeViewModel
 fun ExchangeScreen(viewModel: ExchangeViewModel = koinViewModel()) {
 
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        val contact = viewModel.contact.collectAsState().value
         val message = viewModel.message.collectAsState()
-        Text(message.value)
+        Text("Telefono: ${contact?.phone ?: "Cargando..."}")
+        Text("Email: ${contact?.email ?: "Cargando..."}")
+        Text("Mensaje: ${message.value}")
     }
 
 }
