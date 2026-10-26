@@ -10,6 +10,9 @@ import org.ucb.appp1.exchange.data.datasource.RealTimeDataBase
 import org.ucb.appp1.exchange.data.datasource.RemoteConfigDataSource
 import org.ucb.appp1.exchange.data.repository.ExchangeRepositoryImpl
 import org.ucb.appp1.exchange.domain.repository.ExchangeRepository
+import org.ucb.appp1.notes.data.datasource.FirestoreDataSource
+import org.ucb.appp1.notes.data.repository.NoteRepositoryImpl
+import org.ucb.appp1.notes.domain.repository.NoteRepository
 import org.ucb.appp1.userinformation.data.datasource.GithubRemoteDataSource
 import org.ucb.appp1.userinformation.data.repository.GithubRepositoryImpl
 import org.ucb.appp1.userinformation.data.service.GitHubApiService
@@ -23,4 +26,6 @@ val dataModule = module {
     singleOf(::RealTimeDataBase)
     singleOf(::RemoteConfigDataSource)
     single<ExchangeRepository> { ExchangeRepositoryImpl(get(), get()) }
+    singleOf(::FirestoreDataSource)
+    single<NoteRepository> { NoteRepositoryImpl(get()) }
 }

@@ -44,7 +44,15 @@ Proyecto Kotlin Multiplatform (Android + iOS) con Compose Multiplatform. Paquete
 - `ExchangeViewModel` expone `contact`; `ExchangeScreen` muestra teléfono, email y el mensaje de la base de datos.
 - Los parámetros se crean y publican en Firebase Console → Remote Config.
 
+### Firestore (rama `feature/firestore`)
+- Dependencia `dev.gitlive:firebase-firestore` 2.7.0 (`libs.firebase.firestore`, `commonMain`).
+- Feature `notes` (colección `notes`, campos `title` y `description`): `FirestoreDataSource` (`snapshots` en tiempo real, `add`, `delete`), `NoteDto` (`@Serializable`), `NoteModel`, `NoteRepository`/`NoteRepositoryImpl`, casos de uso `ObserveNotesUseCase`, `AddNoteUseCase`, `DeleteNoteUseCase`, `NotesViewModel` y `NotesScreen` (formulario, lista y botón eliminar).
+- `App.kt` muestra `ExchangeScreen` (Remote Config + Realtime Database) arriba y `NotesScreen` (Firestore) abajo.
+- En Firebase Console hay que crear la base Firestore (Build → Firestore Database) y permitir lectura/escritura en las reglas para pruebas.
+
 ## Pendientes conocidos
+
+- Notificaciones push (Firebase Cloud Messaging): no implementadas.
 
 - iOS: falta `GoogleService-Info.plist`, inicialización de Firebase y enlazar el SDK nativo (CocoaPods o SPM).
 

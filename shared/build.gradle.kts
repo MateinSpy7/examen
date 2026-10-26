@@ -102,6 +102,7 @@ kotlin {
 
             implementation(libs.firebase.database)
             implementation(libs.firebase.config)
+            implementation(libs.firebase.firestore)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

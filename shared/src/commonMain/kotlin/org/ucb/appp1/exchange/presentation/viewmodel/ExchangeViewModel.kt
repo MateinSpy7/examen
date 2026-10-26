@@ -1,6 +1,7 @@
 package org.ucb.appp1.exchange.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
+import dev.gitlive.firebase.FirebaseException
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +30,7 @@ class ExchangeViewModel(
         viewModelScope.launch {
             _contact.value = try {
                 contactUseCase.invoke()
-            } catch (e: Exception) {
+            } catch (e: FirebaseException) {
                 ContactInfo(phone = "Error: ${e.message}", email = "Error: ${e.message}")
             }
         }
