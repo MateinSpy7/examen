@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.androidxRoom)
 
 }
 
@@ -104,6 +105,8 @@ kotlin {
             implementation(libs.firebase.config)
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.messaging.gitlive)
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.sqlite.bundled)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -115,6 +118,13 @@ kotlin {
     }
 }
 
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 dependencies {
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
     androidRuntimeClasspath(libs.compose.uiTooling)
 }
