@@ -4,6 +4,7 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import org.ucb.appp1.crossref.presentation.viewmodel.CrossrefViewModel
 import org.ucb.appp1.exchange.presentation.viewmodel.ExchangeViewModel
+import org.ucb.appp1.homeconfig.presentation.viewmodel.HomeConfigViewModel
 import org.ucb.appp1.notes.presentation.viewmodel.NotesViewModel
 import org.ucb.appp1.notifications.presentation.viewmodel.NotificationsViewModel
 import org.ucb.appp1.signin.presentation.viewmodel.LoginViewModel
@@ -16,4 +17,5 @@ val presentationModule = module {
     viewModelOf(::ExchangeViewModel)
     viewModelOf(::NotesViewModel)
     viewModelOf(::NotificationsViewModel)
+    viewModelOf(::HomeConfigViewModel)
 }

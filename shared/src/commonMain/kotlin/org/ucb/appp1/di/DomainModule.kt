@@ -5,6 +5,8 @@ import org.koin.dsl.module
 import org.ucb.appp1.crossref.domain.usecase.SearchArticlesUseCase
 import org.ucb.appp1.exchange.domain.usecase.GetContactInfoUseCase
 import org.ucb.appp1.exchange.domain.usecase.ObserveExchangeUseCase
+import org.ucb.appp1.homeconfig.domain.usecase.ObserveHomeConfigUseCase
+import org.ucb.appp1.homeconfig.domain.usecase.SyncHomeConfigUseCase
 import org.ucb.appp1.notes.domain.usecase.AddNoteUseCase
 import org.ucb.appp1.notes.domain.usecase.DeleteNoteUseCase
 import org.ucb.appp1.notes.domain.usecase.ObserveNotesUseCase
@@ -22,4 +24,6 @@ val domainModule = module {
     singleOf(::AddNoteUseCase)
     singleOf(::DeleteNoteUseCase)
     singleOf(::GetFcmTokenUseCase)
+    singleOf(::ObserveHomeConfigUseCase)
+    singleOf(::SyncHomeConfigUseCase)
 }

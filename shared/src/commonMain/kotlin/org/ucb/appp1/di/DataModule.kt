@@ -10,6 +10,12 @@ import org.ucb.appp1.exchange.data.datasource.RealTimeDataBase
 import org.ucb.appp1.exchange.data.datasource.RemoteConfigDataSource
 import org.ucb.appp1.exchange.data.repository.ExchangeRepositoryImpl
 import org.ucb.appp1.exchange.domain.repository.ExchangeRepository
+import org.ucb.appp1.homeconfig.data.datasource.HomeConfigRemoteDataSource
+import org.ucb.appp1.homeconfig.data.local.DatabaseFactory
+import org.ucb.appp1.homeconfig.data.local.HomeConfigDatabase
+import org.ucb.appp1.homeconfig.data.repository.HomeConfigRepositoryImpl
+import org.ucb.appp1.homeconfig.domain.repository.HomeConfigRepository
+import org.ucb.appp1.scheduler.SyncScheduler
 import org.ucb.appp1.notes.data.datasource.FirestoreDataSource
 import org.ucb.appp1.notes.data.repository.NoteRepositoryImpl
 import org.ucb.appp1.notes.domain.repository.NoteRepository
@@ -33,4 +39,9 @@ val dataModule = module {
     single<NoteRepository> { NoteRepositoryImpl(get()) }
     singleOf(::MessagingDataSource)
     single<NotificationsRepository> { NotificationsRepositoryImpl(get()) }
+    single<HomeConfigDatabase> { DatabaseFactory().create() }
+    single { get<HomeConfigDatabase>().homeConfigDao() }
+    singleOf(::HomeConfigRemoteDataSource)
+    single<HomeConfigRepository> { HomeConfigRepositoryImpl(get(), get()) }
+    singleOf(::SyncScheduler)
 }
