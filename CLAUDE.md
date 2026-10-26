@@ -50,12 +50,12 @@ Proyecto Kotlin Multiplatform (Android + iOS) con Compose Multiplatform. Paquete
 - `App.kt` muestra `ExchangeScreen` (Remote Config + Realtime Database) arriba y `NotesScreen` (Firestore) abajo.
 - En Firebase Console hay que crear la base Firestore (Build → Firestore Database) y permitir lectura/escritura en las reglas para pruebas.
 
-### Notificaciones push - FCM (solo Android)
-- GitLive no tiene módulo de messaging: se usa el SDK nativo `com.google.firebase:firebase-messaging` con `firebase-bom` 34.18.0, solo en `androidApp`.
+### Notificaciones push - FCM (Android)
+- El token se obtiene con GitLive (`dev.gitlive:firebase-messaging` 2.7.0) en la feature `notifications` de `shared` (datasource, repositorio, `GetFcmTokenUseCase`, `NotificationsViewModel`, `NotificationsScreen`). La recepción en Android usa el SDK nativo `firebase-messaging` con `firebase-bom` 34.18.0 en `androidApp`.
 - `androidApp/.../push/AppFirebaseMessagingService.kt`: `onNewToken` (log) y `onMessageReceived` (muestra notificación local con el canal `default_channel` cuando la app está en primer plano).
-- `AndroidManifest.xml`: permiso `POST_NOTIFICATIONS`, el `service` con `MESSAGING_EVENT` y el canal por defecto.
-- `MainActivity` pide el permiso (Android 13+) y escribe el token en Logcat con la etiqueta `FCM`.
-- Prueba: Firebase Console → Messaging → New campaign → Notification → "Send test message" y pegar el token del Logcat.
+- `AndroidManifest.xml`: permiso `POST_NOTIFICATIONS`, el `service` con `MESSAGING_EVENT`, el canal y el icono por defecto.
+- `MainActivity` pide el permiso (Android 13+). El token se muestra en `NotificationsScreen` (mantener presionado para copiar).
+- Prueba: Firebase Console → Messaging → New campaign → Notification → "Send test message" y pegar el token de la pantalla.
 
 ## Pendientes conocidos
 

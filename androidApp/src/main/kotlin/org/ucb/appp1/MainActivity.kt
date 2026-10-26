@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -12,8 +11,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
-import com.google.firebase.messaging.FirebaseMessaging
-import org.ucb.appp1.push.AppFirebaseMessagingService
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +18,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         requestNotificationPermission()
-        logFcmToken()
 
         setContent {
             App()
@@ -40,15 +36,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun logFcmToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d(AppFirebaseMessagingService.TAG, "Token FCM: ${task.result}")
-            } else {
-                Log.w(AppFirebaseMessagingService.TAG, "No se pudo obtener el token", task.exception)
-            }
-        }
-    }
 }
 
 @Preview

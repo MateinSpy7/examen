@@ -13,6 +13,7 @@ import org.koin.dsl.koinConfiguration
 import org.ucb.appp1.di.sharedModule
 import org.ucb.appp1.exchange.presentation.screen.ExchangeScreen
 import org.ucb.appp1.notes.presentation.screen.NotesScreen
+import org.ucb.appp1.notifications.presentation.screen.NotificationsScreen
 import org.ucb.appp1.signin.presentation.screen.LoginScreen
 import org.ucb.appp1.userinformation.presentation.screen.UserInformationScreen
 
@@ -27,6 +28,7 @@ fun App() {
         MaterialTheme {
             Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
                 Box(modifier = Modifier.weight(1f)) { ExchangeScreen() }
+                Box { NotificationsScreen() }
                 Box(modifier = Modifier.weight(2f)) { NotesScreen() }
             }
         }

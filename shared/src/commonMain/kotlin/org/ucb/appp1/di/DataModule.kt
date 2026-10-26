@@ -13,6 +13,9 @@ import org.ucb.appp1.exchange.domain.repository.ExchangeRepository
 import org.ucb.appp1.notes.data.datasource.FirestoreDataSource
 import org.ucb.appp1.notes.data.repository.NoteRepositoryImpl
 import org.ucb.appp1.notes.domain.repository.NoteRepository
+import org.ucb.appp1.notifications.data.datasource.MessagingDataSource
+import org.ucb.appp1.notifications.data.repository.NotificationsRepositoryImpl
+import org.ucb.appp1.notifications.domain.repository.NotificationsRepository
 import org.ucb.appp1.userinformation.data.datasource.GithubRemoteDataSource
 import org.ucb.appp1.userinformation.data.repository.GithubRepositoryImpl
 import org.ucb.appp1.userinformation.data.service.GitHubApiService
@@ -28,4 +31,6 @@ val dataModule = module {
     single<ExchangeRepository> { ExchangeRepositoryImpl(get(), get()) }
     singleOf(::FirestoreDataSource)
     single<NoteRepository> { NoteRepositoryImpl(get()) }
+    singleOf(::MessagingDataSource)
+    single<NotificationsRepository> { NotificationsRepositoryImpl(get()) }
 }

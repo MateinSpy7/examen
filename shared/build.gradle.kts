@@ -103,6 +103,7 @@ kotlin {
             implementation(libs.firebase.database)
             implementation(libs.firebase.config)
             implementation(libs.firebase.firestore)
+            implementation(libs.firebase.messaging.gitlive)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

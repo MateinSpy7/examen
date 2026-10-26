@@ -8,6 +8,7 @@ import org.ucb.appp1.exchange.domain.usecase.ObserveExchangeUseCase
 import org.ucb.appp1.notes.domain.usecase.AddNoteUseCase
 import org.ucb.appp1.notes.domain.usecase.DeleteNoteUseCase
 import org.ucb.appp1.notes.domain.usecase.ObserveNotesUseCase
+import org.ucb.appp1.notifications.domain.usecase.GetFcmTokenUseCase
 import org.ucb.appp1.signin.domain.usecase.AuthenticateUseCase
 import org.ucb.appp1.userinformation.domain.usecase.FindAliasUseCase
 
@@ -20,4 +21,5 @@ val domainModule = module {
     singleOf(::ObserveNotesUseCase)
     singleOf(::AddNoteUseCase)
     singleOf(::DeleteNoteUseCase)
+    singleOf(::GetFcmTokenUseCase)
 }
