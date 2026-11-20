@@ -64,7 +64,9 @@ class CheckpointViewModel(
     private fun listenNfc() {
         nfcJob?.cancel()
         val reader = if (_state.value.simulationMode) simulatedNfcReader else nfcReader
-        _state.update { it.copy(nfcAvailable = reader.isAvailable()) }
+        val available = reader.isAvailable()
+        _state.update { it.copy(nfcAvailable = available) }
+        if (!available) return
         nfcJob = viewModelScope.launch {
             reader.observeTags().collect { onTagTapped(it) }
         }

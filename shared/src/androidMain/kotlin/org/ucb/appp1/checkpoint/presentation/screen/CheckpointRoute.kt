@@ -9,7 +9,6 @@ import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import org.koin.compose.koinInject
@@ -31,11 +30,8 @@ fun CheckpointRoute(viewModel: CheckpointViewModel = koinViewModel()) {
         viewModel.setBluetoothPermission(hasBluetoothPermission(context))
     }
 
-    LaunchedEffect(Unit) {
-        viewModel.setBluetoothPermission(hasBluetoothPermission(context))
-    }
-
     LifecycleResumeEffect(Unit) {
+        viewModel.setBluetoothPermission(hasBluetoothPermission(context))
         nfcReader.activity = context.findActivity()
         viewModel.startNfc()
         onPauseOrDispose {
