@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
+import org.ucb.appp1.checkpoint.presentation.screen.CheckpointRoute
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         requestNotificationPermission()
 
         setContent {
-            App()
+            App(checkpoint = { CheckpointRoute() })
         }
     }
 
