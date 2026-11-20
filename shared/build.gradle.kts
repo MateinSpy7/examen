@@ -83,6 +83,7 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.work.runtime.ktx)
+            implementation(libs.kable.core)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
