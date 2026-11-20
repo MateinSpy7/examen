@@ -2,6 +2,10 @@ package org.ucb.appp1.di
 
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import org.ucb.appp1.checkpoint.data.datasource.BluetoothScanDataSource
+import org.ucb.appp1.checkpoint.data.service.KableBluetoothScanner
+import org.ucb.appp1.checkpoint.data.service.SimulatedBluetoothScanner
+import org.ucb.appp1.checkpoint.data.service.SimulatedNfcReader
 import org.ucb.appp1.crossref.data.datasource.CrossrefRemoteDataSource
 import org.ucb.appp1.crossref.data.repository.CrossrefRepositoryImpl
 import org.ucb.appp1.crossref.data.service.CrossrefApiService
@@ -44,4 +48,7 @@ val dataModule = module {
     singleOf(::HomeConfigRemoteDataSource)
     single<HomeConfigRepository> { HomeConfigRepositoryImpl(get(), get()) }
     singleOf(::SyncScheduler)
+    single<BluetoothScanDataSource> { KableBluetoothScanner() }
+    singleOf(::SimulatedBluetoothScanner)
+    singleOf(::SimulatedNfcReader)
 }
