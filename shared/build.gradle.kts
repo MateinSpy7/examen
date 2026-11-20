@@ -83,7 +83,6 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.work.runtime.ktx)
-            implementation(libs.kable.core)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -108,6 +107,7 @@ kotlin {
             implementation(libs.firebase.messaging.gitlive)
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
+            implementation(libs.kable.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
