@@ -43,8 +43,28 @@ fun CheckpointRoute(viewModel: CheckpointViewModel = koinViewModel()) {
     CheckpointScreen(
         onRequestPermissions = { permissionLauncher.launch(bluetoothPermissions()) },
         formatTime = ::formatTime,
+        nfcPositionHint = nfcPositionHint(),
         viewModel = viewModel
     )
+}
+
+// Ubicacion aproximada del lector NFC segun la marca; puede variar entre modelos
+private fun nfcPositionHint(): String {
+    val manufacturer = Build.MANUFACTURER.lowercase(Locale.ROOT)
+    val name = "${Build.MANUFACTURER.replaceFirstChar { it.uppercase() }} ${Build.MODEL}"
+    val position = when {
+        "samsung" in manufacturer ->
+            if (Build.MODEL.startsWith("SM-A")) "en la parte superior central" else "en el centro, un poco hacia arriba"
+        "google" in manufacturer -> "en la parte superior, cerca de la cámara"
+        "xiaomi" in manufacturer || "redmi" in manufacturer || "poco" in manufacturer ->
+            "en la parte superior central, cerca de la cámara"
+        "huawei" in manufacturer || "honor" in manufacturer -> "en la parte superior, junto a la cámara"
+        "motorola" in manufacturer -> "en el centro de la parte trasera"
+        "oneplus" in manufacturer || "oppo" in manufacturer || "realme" in manufacturer ->
+            "en el centro, un poco hacia arriba"
+        else -> "en la parte superior central"
+    }
+    return "Detectamos tu $name: coloca la tarjeta $position de la parte trasera y muévela despacio si no responde."
 }
 
 private fun bluetoothPermissions(): Array<String> =

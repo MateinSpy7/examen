@@ -10,6 +10,7 @@ data class CheckpointState(
     val nfcAvailable: Boolean = true,
     val lastTag: NfcTagModel? = null,
     val isScanning: Boolean = false,
+    val readingTag: Boolean = false,
     val devices: List<BluetoothDeviceModel> = emptyList(),
     val history: List<CheckpointModel> = emptyList(),
     val error: String? = null

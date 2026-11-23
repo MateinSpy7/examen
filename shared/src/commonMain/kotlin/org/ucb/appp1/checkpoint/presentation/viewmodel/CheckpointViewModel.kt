@@ -84,7 +84,7 @@ class CheckpointViewModel(
             _state.update { it.copy(error = "Falta el permiso de Bluetooth") }
             return
         }
-        _state.update { it.copy(isScanning = true, error = null) }
+        _state.update { it.copy(isScanning = true, readingTag = saveToHistory, error = null) }
         val scanner = if (current.simulationMode) simulatedScanner else bluetoothScanner
         viewModelScope.launch {
             try {
@@ -98,7 +98,7 @@ class CheckpointViewModel(
             } catch (e: UnmetRequirementException) {
                 _state.update { it.copy(error = e.message ?: "No se pudo escanear Bluetooth") }
             } finally {
-                _state.update { it.copy(isScanning = false) }
+                _state.update { it.copy(isScanning = false, readingTag = false) }
             }
         }
     }

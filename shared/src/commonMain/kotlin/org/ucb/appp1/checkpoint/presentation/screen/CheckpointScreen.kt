@@ -44,6 +44,7 @@ private const val MILLIS_PER_SECOND = 1_000L
 fun CheckpointScreen(
     onRequestPermissions: () -> Unit,
     formatTime: (Long) -> String,
+    nfcPositionHint: String? = null,
     viewModel: CheckpointViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -51,6 +52,7 @@ fun CheckpointScreen(
     CheckpointContent(
         state = state,
         formatTime = formatTime,
+        nfcPositionHint = nfcPositionHint,
         onSimulationChange = viewModel::setSimulationMode,
         onSimulateTap = viewModel::simulateTap,
         onScan = viewModel::scanAround,
@@ -63,6 +65,7 @@ fun CheckpointScreen(
 private fun CheckpointContent(
     state: CheckpointState,
     formatTime: (Long) -> String,
+    nfcPositionHint: String?,
     onSimulationChange: (Boolean) -> Unit,
     onSimulateTap: () -> Unit,
     onScan: () -> Unit,
@@ -75,7 +78,7 @@ private fun CheckpointContent(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { Header(state.simulationMode, onSimulationChange) }
-        item { NfcCard(state, onSimulateTap) }
+        item { NfcCard(state, nfcPositionHint, onSimulateTap) }
         item { BluetoothCard(state, onScan, onRequestPermissions) }
         if (state.devices.isNotEmpty()) {
             item { SectionTitle("Dispositivos encontrados (${state.devices.size})") }
@@ -132,7 +135,7 @@ private fun Header(simulationMode: Boolean, onSimulationChange: (Boolean) -> Uni
 }
 
 @Composable
-private fun NfcCard(state: CheckpointState, onSimulateTap: () -> Unit) {
+private fun NfcCard(state: CheckpointState, nfcPositionHint: String?, onSimulateTap: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
@@ -145,8 +148,29 @@ private fun NfcCard(state: CheckpointState, onSimulateTap: () -> Unit) {
                     onClick = onSimulateTap,
                     modifier = Modifier.fillMaxWidth()
                 ) { Text("Simular toque de tarjeta") }
-                state.nfcAvailable -> Text("Acerca una tarjeta a la parte trasera del celular.")
+                state.nfcAvailable -> {
+                    Text("Acerca una tarjeta a la parte trasera del celular.")
+                    nfcPositionHint?.let {
+                        Text(it, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                    }
+                }
                 else -> Text("NFC no disponible o desactivado. Actívalo en los ajustes del celular.")
+            }
+            if (state.readingTag) {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.tertiaryContainer
+                ) {
+                    Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            "¡Tarjeta detectada! Espera un momento y mantén la tarjeta en la misma posición.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                    }
+                }
             }
             state.lastTag?.let { TagInfo(it) }
             Text(
@@ -256,6 +280,7 @@ fun CheckpointPreview() {
                 history = listOf(CheckpointModel(timestampMillis = 0L, deviceCount = 2, closestDevice = closest))
             ),
             formatTime = { "12:00:00" },
+            nfcPositionHint = null,
             onSimulationChange = {},
             onSimulateTap = {},
             onScan = {},
